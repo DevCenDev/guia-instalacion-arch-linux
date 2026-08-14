@@ -304,4 +304,3 @@ umount -R /mnt
 # Reiniciando el sistema
 reboot 
 ```
-<img src="assets/arch-linux.png" height="300" width="500">
