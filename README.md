@@ -171,7 +171,7 @@ mount /dev/<efi_partition> /mnt/boot
 ### 9. Instalar Paquetes Base
 
 ```bash
-pacstrap -K /mnt base linux linux-firmware [cpu]-ucode nano
+pacstrap -K /mnt base linux linux-firmware [cpu]-ucode nano sudo
 ```
 
 ### 10. Generar fstab
@@ -185,3 +185,123 @@ genfstab -U /mnt >> /mnt/etc/fstab
 ```bash
 arch-chroot /mnt
 ```
+### 12. Configurando zona horaria
+```bash
+#Listar zonas horarias
+timedatectl list-timezones
+
+# Establecer zona horaria
+ln -sf /usr/share/zoneinfo/<Region>/<Ciudad> /etc/localtime 
+hwclock --systohc
+```
+### 13. Configurar Idioma y Localización
+
+```bash
+# Editar locale.gen
+nano /etc/locale.gen
+# Descomenta: es_ES.UTF-8 UTF-8 (o tu idioma)
+
+# Generar locales
+locale-gen
+
+# Crear archivo locale.conf
+echo "LANG=es_ES.UTF-8" > /etc/locale.conf
+```
+### 14. Configuracion de red
+Creacion del nombre de usuario
+```bash
+echo [hostname] > /etc/hostname
+```
+Añade tu maquina al directorio:
+```bash
+nano /etc/hosts
+
+127.0.0.1    localhost  
+::1          localhost  
+127.0.1.1    [hostname].localhost [hostname]
+```
+
+#### 14.1 Instalacion del administrador de redes
+
+```bash
+pacman -S networkmanager
+
+# Activando el servicio de red
+systemctl enable --now NetworkManager
+```
+### 15. Agregar un usuario y contraseña
+
+#### 15.1 Configuracion de usuario
+Creamos un nuevo usuario 
+```bash
+useradd -m [username]
+```
+Agregamos al grupo wheel
+```bash
+usermod -aG wheel [username]
+```
+Descomentamos la parte de **%wheel**
+```bash
+EDITOR=nano visudo
+```
+#### 15.2 Contraseña
+```bash
+# contraseña para usuario root:
+passwd 
+
+# contraseña para [username]:
+passwd [username]
+```
+
+### 16 GRUB
+Instalacion de grub y os-prober para agregar automaticamente entradas de arranque para otros sistemas operativos.
+
+```bash
+pacman -S grub os-prober
+```
+#### 16.1 UEFI
+
+```bash
+pacman -S efibootmgr
+```
+Instalar el grub en la particion efi que anteriormente creamos
+
+```bash
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+```
+Generar el archivo de configuracion para el GRUB
+
+```bash
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+#### 16.2 BIOS
+Instalar grub para el modo de arranque BIOS
+```bash
+grub-install --target=i386-pc /dev/sda
+```
+Generar el archivo de configuracion para el GRUB
+
+```bash
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+Si sale una advertencia que os-prober no se ejecutará, descomenta 'GRUB_DISABLE_OS_PROBER=false' en la siguiente ruta:
+
+```bash
+nano /etc/default/grub
+```
+### 17 Instalación de Arch linux completada
+Salir de arch-chroot /mnt
+
+```bash
+exit
+```
+Desmontamos las particiones y reiniciamos
+
+```bash
+umount -R /mnt
+
+# Reiniciando el sistema
+reboot 
+```
+<img src="assets/arch-linux.png" height="300" width="500">
