@@ -218,7 +218,7 @@ nano /etc/hosts
 
 127.0.0.1    localhost  
 ::1          localhost  
-127.0.1.1    [hostname].localhost [hostname]
+127.0.0.1    [hostname].localhost [hostname]
 ```
 
 #### 14.1 Instalacion del administrador de redes
@@ -240,7 +240,7 @@ Agregamos al grupo wheel
 ```bash
 usermod -aG wheel [username]
 ```
-Descomentamos la parte de **%wheel**
+Descomentamos la parte de **%wheel ALL=(ALL:ALL) ALL**
 ```bash
 EDITOR=nano visudo
 ```
