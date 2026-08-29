@@ -38,7 +38,7 @@ Antes de empezar, aclaramos que no es una distribución basada en otra distribuc
 16. [GRUB](#16-grub)
     - [UEFI](#161-uefi)
     - [BIOS](#162-bios)
-17. [Instalacion de arch linux completada](#17-instalacion-de-arch-linux-completada)
+17. [Instalación de Arch linux completada](#17-instalación-de-arch-linux-completada)
     - [Recursos adicionales](#recursos-adicionales)
 
 ## Pasos de Instalación
