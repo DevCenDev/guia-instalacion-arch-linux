@@ -12,6 +12,35 @@ Antes de empezar, aclaramos que no es una distribución basada en otra distribuc
 - Acceso a internet durante la instalación
 - Conocimientos básicos de línea de comandos en linux
 
+### Indice
+
+1. [Descargar la Imagen ISO](#1-descargar-la-imagen-iso)
+2. [Crear USB Booteable](#2-crear-usb-booteable)
+3. [Iniciar desde USB](#3-iniciar-desde-usb)
+   3.1 [Configuracion del teclado](#31-configuracion-del-teclado)
+4. [Modo de arranque](#4-modo-de-arranque)
+5. [Conexion a internet](#5-conexion-a-internet)
+   5.1 [Ethernet](#51-ethernet)
+   5.2 [WiFi](#52-wifi)
+6. [Particionar el disco](#6-particionar-el-disco)
+7. [Formatear particiones](#7-formatear-particiones)
+   7.1 [Particion Swap](#71-particion-swap)
+8. [Montar particiones](#8-montar-particiones)
+9. [Instalar paquetes base](#9-instalar-paquetes-base)
+10. [Generar fstab](#10-generar-fstab)
+11. [Ingreso al Sistema](#11-ingreso-al-sistema)
+12. [Configurar zona horaria](#12-configurar-zona-horaria)
+13. [Configurar idioma y localización](#13-configurar-idioma-y-localización)
+14. [Configuracion de red](#14-configuracion-de-red)
+   14.1 [Instalacion del administrador de redes](#141-instalacion-del-administrador-de-redes)
+15. [Agregar un usuario y contraseña](#15-agregar-un-usuario-y-contraseña)
+   15.1 [Configuracion de usuario](#151-configuracion-de-usuario)
+16. [GRUB](#16-grub)
+   16.1 [UEFI](#161-uefi)
+   16.2 [BIOS](#162-bios)
+17. [Instalacion de arch linux completada](#17-instalación-de-arch-linux-completada)
+[Recursos adicionales](#-recursos-útiles)
+
 ## Pasos de Instalación
 
 ### 1. Descargar la Imagen ISO
@@ -185,7 +214,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 ```bash
 arch-chroot /mnt
 ```
-### 12. Configurando zona horaria
+### 12. Configurar zona horaria
 ```bash
 #Listar zonas horarias
 timedatectl list-timezones
@@ -304,3 +333,16 @@ umount -R /mnt
 # Reiniciando el sistema
 reboot 
 ```
+## 📚 Recursos Útiles
+- [Wiki Oficial de Arch Linux](https://wiki.archlinux.org/)
+- [Guía de Instalación Oficial](https://wiki.archlinux.org/title/Installation_guide)
+
+## Notas Importantes
+
+- Arch Linux es una distribución "rolling release", requiere mantenimiento regular
+- Actualiza tu sistema frecuentemente:`sudo pacman -Syu`
+- Lee las noticias en [archlinux.org](https://archlinux.org/) antes de actualizar
+- La comunidad es muy activa y hay excelente documentación disponible
+
+---
+**¡Bienvenido a Arch Linux!**
